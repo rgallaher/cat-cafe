@@ -147,59 +147,67 @@
                 <div class="gridBox">
                     <div class="contentBox">
                         <div id="catUnlock" class="nes-container is-rounded" style="display:none">
-                            <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
-                            <br>
-                            <table>
-                                <tr>
-                                    <td>
-                                        Cats: <span id="cats">0</span>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="nes-btn is-disabled" onclick="adoptCat(1)" id="adoptCat">Adopt Cat (Cost: $100)</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="nes-btn is-disabled" onclick="adoptCat(10)" id="adoptTenCat">+10</button>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="nes-btn is-disabled" onclick="adoptCat(100)" id="adoptHundredCat">+100</button>
-                                    </td>
-                                </tr>
-                            </table>
+                            
+                            <button type="button" class="nes-btn is-disabled" onclick="adoptCat(1)" id="adoptCat">Adopt Cat (Cost: $100)</button>
+                            <div id="nameCat" style="display:none">
+                                <div class="nes-field is-inline">
+                                    <input type="text" id="catNameField" class="nes-input is-success" placeholder="Name cat">
+                                </div>
+                                <button type="button" class="nes-btn is-success" onclick="nameCat()">Confirm</button>
+                            </div>
 
-                            <!--hunger and fish-->
-                            <div id="hungerUnlock" style="display:none">
-                                <br>
+                            <div id="catStats" style="display:none">
                                 <table>
                                     <tr>
+                                        <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
+                                    </tr>
+                                    <tr>
                                         <td>
-                                            <span id="catHunger">The cats are hungry.</span>
+                                            <span id="catName"></span>
                                         </td>
                                         <td>
-                                            <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed Cats (Cost: 0 Fish)</button>
+                                        </td>
+                                        <td>
+                                            <span id="catLevel">Level 1</span>
                                         </td>
                                     </tr>
                                 </table>
-                                <br>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="https://i.imgur.com/N2txc3V.png" width="32" height="32">
-                                        </td>
-                                        <td>
-                                            Fish: <span id="fish">0</span>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(1)" id="buyFish">Buy Fish (Cost: $5)</button>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(10)" id="buyTenFish">+10</button>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(100)" id="buyHundredFish">+100</button>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <!--<img src="https://i.imgur.com/r75Qe1W.jpeg" width="144" height="160">-->
+
+                                <!--hunger and fish-->
+                                <div id="hungerUnlock" style="display:none">
+                                    <br>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <span id="catHunger">The cat is hungry.</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed Cats (Cost: 0 Fish)</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <br>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="https://i.imgur.com/N2txc3V.png" width="32" height="32">
+                                            </td>
+                                            <td>
+                                                Fish: <span id="fish">0</span>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="nes-btn is-disabled" onclick="fishClick(1)" id="buyFish">Buy Fish (Cost: $5)</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="nes-btn is-disabled" onclick="fishClick(10)" id="buyTenFish">+10</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="nes-btn is-disabled" onclick="fishClick(100)" id="buyHundredFish">+100</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!--<img src="https://i.imgur.com/r75Qe1W.jpeg" width="144" height="160">-->
+                                </div>
                             </div>
                         </div>
                     </div>

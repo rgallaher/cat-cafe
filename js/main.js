@@ -38,7 +38,8 @@ var cat = {
     tipBonus: 0,
     hunger: 0,
     hungerPerSecond: 1,
-    hungerText: "The cats are hungry."
+    hungerText: "The cats are hungry.",
+    name: "none"
 }
 
 //unlocks
@@ -104,6 +105,14 @@ function adoptCat(number) {
         gameTick()
         number--
     }
+    document.getElementById('nameCat').style.display = "block"
+}
+
+function nameCat() {
+    cat.name = document.getElementById('catNameField').value
+    document.getElementById('nameCat').style.display = "none"
+    document.getElementById('catName').innerHTML = cat.name
+    document.getElementById('catStats').style.display = "block"
 }
 
 function feedCat() {
@@ -118,17 +127,17 @@ function feedCat() {
 //tracks cat hunger
 function catHunger() {
     if(cat.hunger + resources.fishHunger > 100) {
-        cat.hungerText = "The cats are full."
+        cat.hungerText = cat.name + " is full."
         cat.tipBonus = 1
         document.getElementById("catIcon").outerHTML = '<img id="catIcon" src="https://i.imgur.com/1osc4lc.png" width="120" height="150">'
     }
     else if(cat.hunger >= 30) {
-        cat.hungerText = "The cats are satisfied."
+        cat.hungerText = cat.name + " is satisfied."
         cat.tipBonus = 1
         document.getElementById("catIcon").outerHTML = '<img id="catIcon" src="https://i.imgur.com/1osc4lc.png" width="120" height="150">'
     }
     else {
-        cat.hungerText = "The cats are hungry."
+        cat.hungerText = cat.name + " is hungry."
         cat.tipBonus = 0
         document.getElementById("catIcon").outerHTML = '<img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">'
     }
@@ -169,6 +178,10 @@ function unlocks() {
         document.getElementById("frenchPress").style.display = "block"
         document.getElementById("stripeCheckout").style.display = "block"
         unlocked.tierOne = 1
+    }
+
+    if(cat.count > 0) {
+        document.getElementById("adoptCat").style.display = "none"
     }
 }
 
@@ -222,28 +235,13 @@ function gameTick() {
         document.getElementById("buyHundredCashier").setAttribute('class','nes-btn is-disabled')
     }
 
-    if(unlocked.cat == 1) {
-        document.getElementById("cats").innerHTML = cat.count
-        document.getElementById("adoptCat").innerHTML = "Adopt Cat (Cost: $" + Math.ceil(cat.cost) + ")"
+    if(unlocked.cat == 1 && cat.count == 0) {
         if(resources.money >= cat.cost) {
             document.getElementById("adoptCat").setAttribute('class','nes-btn')
         }
         else {
             document.getElementById("adoptCat").setAttribute('class','nes-btn is-disabled')
-        }
-        if(resources.money >= cat.cost * 10) {
-            document.getElementById("adoptTenCat").setAttribute('class','nes-btn')
-        }
-        else {
-            document.getElementById("adoptTenCat").setAttribute('class','nes-btn is-disabled')
-        }
-        if(resources.money >= cat.cost * 100) {
-            document.getElementById("adoptHundredCat").setAttribute('class','nes-btn')
-        }
-        else {
-            document.getElementById("adoptHundredCat").setAttribute('class','nes-btn is-disabled')
-        }
-    
+        }   
     }
 
     if(unlocked.hunger == 1) {
