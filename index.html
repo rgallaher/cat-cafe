@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cat Cafe</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.5/build/pure-min.css" integrity="sha384-LTIDeidl25h2dPxrB2Ekgc9c7sEC3CWGM6HeFmuDNUjX76Ert4Z4IY714dhZHPLd" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Press+Start+2P">
+    <link rel="stylesheet" href="https://unpkg.com/nes.css@latest/css/nes.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/interface.css"/>
+
+    <style>
+        html, body, pre, code, kbd, samp, input, select, textarea {
+        font-family: "Press Start 2P";
+    }
+    .pure-g [class *= "pure-u"] {
+        /* Set your content font stack here: */
+        font-family: "Press Start 2P";
+    }
+    </style>
+
+    <script src="js/main.js" charset="utf-8" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="imageBack">
+        <div class="pure-g">
+            <div class="pure-u-1-2">
+                <!--coffee menu-->
+                <div class="gridBox">
+                    <div class="contentBox">
+                        <div id="resources" class="nes-container is-rounded">
+                            <table>
+                                <tr>
+                                    Coffee Price: <span id="coffeePrice">$1</span>
+                                </tr>
+                                <tr>
+                                    Average Tip: <span id="averageTip">$0</span>
+                                </tr>
+                                <tr></tr>
+                                <tr>
+                                    <td>
+                                        <img src="https://i.imgur.com/TW6XbcN.png" width="64" height="64">
+                                    </td>
+                                    <td>
+                                        Coffees: <span id="coffees">0</span>
+                                    </td>    
+                                    <td>
+                                        <button type="button" class="nes-btn" onclick="coffeeClick(1)">Make Coffee</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="https://i.imgur.com/H7nXg0T.png" width="58" height="30">
+                                    </td>
+                                    <td>
+                                        Money: <span id="money">$0</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn" onclick="sellClick(1)">Sell Coffee</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <br>
+
+                    <div class="contentBox">
+                        <div id="buildings" class="nes-container is-rounded">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="https://i.imgur.com/BrjwH1S.png" width="32" height="32">
+                                    </td>
+                                    <td>
+                                        Baristas: <span id="baristas">0</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="buyBarista(1)" id="buyBarista">Hire Barista (Cost: $10)</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="buyBarista(10)" id="buyTenBarista">+10</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="buyBarista(100)" id="buyHundredBarista">+100</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="https://i.imgur.com/g5LX4dS.png" width="32" height="32">
+                                    </td>
+                                    <td>
+                                        Cashiers: <span id="cashiers">0</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="buyCashier(1)" id="buyCashier">Hire Cashier (Cost: $10)</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="buyCashier(10)" id="buyTenCashier">+10</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="buyCashier(100)" id="buyHundredCashier">+100</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--coffee upgrades-->
+                <div class="gridBox">
+                    <div class="contentBox">
+                        <div id="coffeeUpgrades" class="nes-container is-rounded">
+                            Upgrades:
+                            <br>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('frenchPress')" id="frenchPress">
+                                            img
+                                            <div class="nes-container is-dark with-title hide">
+                                                <p class="title">French Press</p>
+                                                <p>Cost: 1000</p>
+                                                <p>Barista efficiency + 100%</p>
+                                            </div>
+                                        </button>
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('stripeCheckout')" id="stripeCheckout">Stripe Checkout (Cost: 1000)</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pure-u-1-2">
+                <!--cat menu-->
+                <div class="gridBox">
+                    <div class="contentBox">
+                        <div id="catUnlock" class="nes-container is-rounded" style="display:none">
+                            <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
+                            <br>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Cats: <span id="cats">0</span>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="adoptCat(1)" id="adoptCat">Adopt Cat (Cost: $100)</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="adoptCat(10)" id="adoptTenCat">+10</button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="adoptCat(100)" id="adoptHundredCat">+100</button>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!--hunger and fish-->
+                            <div id="hungerUnlock" style="display:none">
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span id="catHunger">The cats are hungry.</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed Cats (Cost: 0 Fish)</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="https://i.imgur.com/N2txc3V.png" width="32" height="32">
+                                        </td>
+                                        <td>
+                                            Fish: <span id="fish">0</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(1)" id="buyFish">Buy Fish (Cost: $5)</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(10)" id="buyTenFish">+10</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(100)" id="buyHundredFish">+100</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!--<img src="https://i.imgur.com/r75Qe1W.jpeg" width="144" height="160">-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--cat upgrades-->
+                <div class="gridBox">
+                    <div class="contentBox">
+                        <div id="catUpgrades" class="nes-container is-rounded">
+                            Upgrades:
+                            <br>
+                            <table>
+                                <tr>
+                                    
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

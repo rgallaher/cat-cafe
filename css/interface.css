@@ -1,0 +1,46 @@
+* {
+box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+img {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+table td {
+    border: 10px solid transparent;
+}
+
+.imageBack {
+min-height: 100vh;
+background-image: url('https://i.imgur.com/LNWvePl.gif');
+background-size: cover;
+background-repeat: no-repeat;
+padding: 40px;
+}
+
+.gridBox {
+    background: transparent;
+    padding: 10px;
+}
+
+.contentBox {
+background: lightsteelblue;
+padding: -100px;
+border-radius: 12px;
+}
+
+.hide {
+  display: none;
+}
+
+.nes-btn:hover div {
+    position: fixed;
+    display: inline-block;
+    z-index: 99 !important;
+}
