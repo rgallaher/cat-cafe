@@ -120,7 +120,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('frenchPress')" id="frenchPress">
+                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('frenchPress')" id="frenchPress" style="display:none">
                                             img
                                             <div class="nes-container is-dark with-title hide">
                                                 <p class="title">French Press</p>
@@ -133,7 +133,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('stripeCheckout')" id="stripeCheckout">Stripe Checkout (Cost: 1000)</button>
+                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('stripeCheckout')" id="stripeCheckout" style="display:none">Stripe Checkout (Cost: 1000)</button>
                                     </td>
                                 </tr>
                             </table>
@@ -159,60 +159,122 @@
                             <div id="catStats" style="display:none">
                                 <table>
                                     <tr>
-                                        <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
-                                    </tr>
-                                    <tr>
                                         <td>
                                             <span id="catName"></span>
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>
+                                            <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>
                                             <span id="catLevel">Level 1</span>
                                         </td>
+                                        <td>
+                                            - XP:
+                                        </td>
+                                        <td>
+                                            <progress class="nes-progress is-warning" value="0" max="100" id="catXp"></progress>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span id="catDps">DPS: 10</span>
+                                        </td>
+                                        <td>
+                                            - HP:
+                                        </td>
+                                        <td>
+                                            <progress class="nes-progress is-success" value="100" max="100" id="catHealth"></progress>
+                                        </td>
                                     </tr>
                                 </table>
-
-                                <!--hunger and fish-->
-                                <div id="hungerUnlock" style="display:none">
-                                    <br>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <span id="catHunger">The cat is hungry.</span>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed Cats (Cost: 0 Fish)</button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <br>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <img src="https://i.imgur.com/N2txc3V.png" width="32" height="32">
-                                            </td>
-                                            <td>
-                                                Fish: <span id="fish">0</span>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="nes-btn is-disabled" onclick="fishClick(1)" id="buyFish">Buy Fish (Cost: $5)</button>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="nes-btn is-disabled" onclick="fishClick(10)" id="buyTenFish">+10</button>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="nes-btn is-disabled" onclick="fishClick(100)" id="buyHundredFish">+100</button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <!--<img src="https://i.imgur.com/r75Qe1W.jpeg" width="144" height="160">-->
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
+                <!--rpg-->
+                <div id="rpgUnlock" style="display:none">
+                    <div class="gridBox">
+                        <div class="contentBox">
+                            <div class="nes-container is-rounded">
+                                <div class="innerContentBox">
+                                    <div class="nes-container with-title is-centered">
+                                        <p class="title" id="stage">Stage 1</p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <span id="monsterName">Indoor Fish -</span>
+                                                </td>
+                                                <td>
+                                                    <span id="monsterLevel">Level 1</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    HP: 
+                                                </td>
+                                                <td>
+                                                    <progress class="nes-progress is-error" value="100" max="100" id="monsterHealth"></progress>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <img src="https://i.imgur.com/N2txc3V.png" width="128" height="128">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--hunger and fish-->
+                <div id="hungerUnlock" style="display:none">
+                    <div class="gridBox">
+                        <div class="contentBox">
+                            <div class="nes-container is-rounded">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span id="catHunger">The cat is hungry.</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed Cats (Cost: 0 Fish)</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <br>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="https://i.imgur.com/N2txc3V.png" width="32" height="32">
+                                        </td>
+                                        <td>
+                                            Fish: <span id="fish">0</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(1)" id="buyFish">Buy Fish (Cost: $5)</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(10)" id="buyTenFish">+10</button>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="nes-btn is-disabled" onclick="fishClick(100)" id="buyHundredFish">+100</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!--<img src="https://i.imgur.com/r75Qe1W.jpeg" width="144" height="160">-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!--cat upgrades-->
                 <div class="gridBox">
                     <div class="contentBox">
@@ -221,7 +283,16 @@
                             <br>
                             <table>
                                 <tr>
-                                    
+                                    <td>
+                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('outsideCat')" id="outsideCat" style="display:none">
+                                            img
+                                            <div class="nes-container is-dark with-title hide">
+                                                <p class="title">Outside Cat</p>
+                                                <p>Cost: 3000</p>
+                                                <p>Time to put your outside shoes on!</p>
+                                            </div>
+                                        </button>
+                                    </td>
                                 </tr>
                             </table>
                         </div>

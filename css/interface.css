@@ -35,6 +35,12 @@ padding: -100px;
 border-radius: 12px;
 }
 
+.innerContentBox {
+    background: darkseagreen;
+    padding: -100px;
+    border-radius: 0px;
+}
+
 .hide {
   display: none;
 }

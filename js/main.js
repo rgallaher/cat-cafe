@@ -8,12 +8,13 @@ var settings = {
 //resources
 
 var resources = {
-    money: 1000,
+    money: 5000,
     coffees: 0,
     coffeePrice: 1,
     fish: 0,
     fishPrice: 5,
-    fishHunger: 10
+    fishHunger: 10,
+    fishHealth: 10
 }
 
 //buildings
@@ -38,16 +39,33 @@ var cat = {
     tipBonus: 0,
     hunger: 0,
     hungerPerSecond: 1,
-    hungerText: "The cats are hungry.",
-    name: "none"
+    hungerText: "",
+    name: "The cat",
+
+    //stats
+    level: 1,
+    dpsMult: 10,
+    dps: 10,
+    health: 100,
+    xp: 0
 }
+
+var monster = {
+    health: 100,
+    name: ["Bat", "Dragon", "Worm"],
+    level: 1,
+    stage: 1
+}
+
 
 //unlocks
 
 var unlocked = {
     cat: 0,
     hunger: 0,
-    tierOne: 0
+    tierOne: 0,
+    rpgBuy: 0,
+    rpg: 0
 }
 
 //resource get functions
@@ -119,6 +137,13 @@ function feedCat() {
     if(resources.fish >= cat.count && cat.hunger + resources.fishHunger <= 100) {
         resources.fish -= cat.count
         cat.hunger += resources.fishHunger
+        
+        if(cat.health + resources.fishHealth <= cat.level * 100) {
+            cat.health += resources.fishHealth
+        }
+        else if(cat.health < cat.level * 100) {
+            cat.health = cat.level * 100
+        }
     }
     catHunger()
     gameTick()
@@ -148,6 +173,33 @@ function catHunger() {
     gameTick()
 }
 
+//rpg
+
+function combat() {
+    if(unlocked.rpg == 1) {
+        monster.health -= (cat.dps / 100)
+        cat.health -= (monster.level / 100)
+        if(monster.health <= 0) {
+            monster.stage += 1
+            monster.level = Math.ceil(monster.stage / 10)
+            monster.health = 100 * monster.level
+            cat.xp += monster.level
+            if (cat.xp >= cat.level * 10) {
+                cat.xp = 0
+                cat.level += 1
+            }
+            cat.dps = cat.dpsMult * cat.level
+        }
+        if(cat.health <= 0) {
+            monster.stage = 1
+            monster.level = Math.ceil(monster.stage / 10)
+            monster.health = 100 * monster.level
+            cat.health = 100 * cat.level
+        }
+    }
+}
+
+
 //upgrades
 
 function upgrades(string) {
@@ -159,7 +211,13 @@ function upgrades(string) {
     if(string == "stripeCheckout" && resources.money >= 1000) {
         cashier.perSecond *= 2
         resources.money -= 1000
-        document.getElementById("frenchPress").style.display = "none"
+        document.getElementById("stripeCheckout").style.display = "none"
+    }
+    if(string == "outsideCat" && resources.money >= 3000) {
+        unlocked.rpg = 1
+        resources.money -= 3000
+        document.getElementById("outsideCat").style.display = "none"
+        document.getElementById("rpgUnlock").style.display = "block"
     }
 }
 
@@ -183,12 +241,19 @@ function unlocks() {
     if(cat.count > 0) {
         document.getElementById("adoptCat").style.display = "none"
     }
+
+    if(unlocked.hunger == 1 && unlocked.rpgBuy == 0 && resources.money >= 1500) {
+        document.getElementById("outsideCat").style.display = "block"
+        unlocked.rpgBuy = 1
+    }
 }
 
 //updates the game ui
 function gameTick() {
     document.getElementById("coffeePrice").innerHTML = "$" + resources.coffeePrice
-    document.getElementById("averageTip").innerHTML = "$" + (cat.tipBonus * cat.count)
+    if(cat.count > 0) {
+        document.getElementById("averageTip").innerHTML = "$" + (cat.tipBonus * cat.level)
+    }
     
     document.getElementById("money").innerHTML = "$" + Math.floor(resources.money)
     document.getElementById("coffees").innerHTML = Math.floor(resources.coffees)
@@ -247,7 +312,7 @@ function gameTick() {
     if(unlocked.hunger == 1) {
         document.getElementById("catHunger").innerHTML = cat.hungerText
         document.getElementById("feedCat").innerHTML = "Feed Cats (Cost: " + cat.count + " Fish)"
-        if(resources.money >= cat.count) {
+        if(resources.fish >= cat.count && cat.hunger + resources.fishHunger < 100) {
             document.getElementById("feedCat").setAttribute('class','nes-btn')
         }
         else {
@@ -276,6 +341,18 @@ function gameTick() {
         }
     }
 
+    //rpg
+
+    if(unlocked.rpg == 1) {
+        document.getElementById("catLevel").innerHTML = "Level " + cat.level
+        document.getElementById("catXp").setAttribute('value', cat.xp * 10 / cat.level)
+        document.getElementById("catHealth").setAttribute('value', cat.health / cat.level)
+        document.getElementById("catDps").innerHTML = "DPS: " + cat.dps
+        document.getElementById("stage").innerHTML = "Stage " + monster.stage
+        document.getElementById("monsterLevel").innerHTML = "Level " + monster.level
+        document.getElementById("monsterHealth").setAttribute('value', monster.health / monster.level)
+    }
+
     //upgrades
 
     if(resources.money >= 1000) {
@@ -291,6 +368,13 @@ function gameTick() {
     else {
         document.getElementById("stripeCheckout").setAttribute('class','nes-btn is-disabled')
     }
+
+    if(resources.money >= 3000) {
+        document.getElementById("outsideCat").setAttribute('class','nes-btn')
+    }
+    else {
+        document.getElementById("outsideCat").setAttribute('class','nes-btn is-disabled')
+    }
     
 }
 
@@ -299,6 +383,7 @@ window.setInterval(function() {
     coffeeClick(barista.count * barista.perSecond / 100)
     sellClick(cashier.count * cashier.perSecond / 100)
     catHunger()
+    combat()
     unlocks()
     gameTick()
 }, 10)
