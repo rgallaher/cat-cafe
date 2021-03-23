@@ -8,7 +8,7 @@ var settings = {
 //resources
 
 var resources = {
-    money: 5000,
+    money: 0,
     coffees: 0,
     coffeePrice: 1,
     fish: 0,
