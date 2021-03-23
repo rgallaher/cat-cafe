@@ -175,10 +175,10 @@ function catHunger() {
 
 //rpg
 
-function combat() {
+function combat(number) {
     if(unlocked.rpg == 1) {
-        monster.health -= (cat.dps / 100)
-        cat.health -= (monster.level / 100)
+        monster.health -= (cat.dps / number)
+        cat.health -= (monster.level / number)
         if(monster.health <= 0) {
             monster.stage += 1
             monster.level = Math.ceil(monster.stage / 10)
@@ -218,6 +218,7 @@ function upgrades(string) {
         resources.money -= 3000
         document.getElementById("outsideCat").style.display = "none"
         document.getElementById("rpgUnlock").style.display = "block"
+        document.getElementById("rpgStats").style.display = "block"
     }
 }
 
@@ -233,6 +234,7 @@ function unlocks() {
     }
     
     if(unlocked.tierOne == 0 && resources.money >= 100) {
+        document.getElementById("coffeeUpgrades").style.display = "block"
         document.getElementById("frenchPress").style.display = "block"
         document.getElementById("stripeCheckout").style.display = "block"
         unlocked.tierOne = 1
@@ -243,6 +245,7 @@ function unlocks() {
     }
 
     if(unlocked.hunger == 1 && unlocked.rpgBuy == 0 && resources.money >= 1500) {
+        document.getElementById("catUpgrades").style.display = "block"
         document.getElementById("outsideCat").style.display = "block"
         unlocked.rpgBuy = 1
     }
@@ -380,10 +383,14 @@ function gameTick() {
 
 //game refresh rate
 window.setInterval(function() {
-    coffeeClick(barista.count * barista.perSecond / 100)
-    sellClick(cashier.count * cashier.perSecond / 100)
+    coffeeClick(barista.count * barista.perSecond / 50)
+    sellClick(cashier.count * cashier.perSecond / 50)
     catHunger()
-    combat()
     unlocks()
     gameTick()
-}, 10)
+}, 20)
+
+window.setInterval(function() {
+    combat(1)
+    gameTick()
+}, 1000)

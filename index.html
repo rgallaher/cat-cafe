@@ -112,16 +112,16 @@
                 </div>
                 
                 <!--coffee upgrades-->
-                <div class="gridBox">
+                <div id="coffeeUpgrades" class="gridBox" style="display:none">
                     <div class="contentBox">
-                        <div id="coffeeUpgrades" class="nes-container is-rounded">
+                        <div class="nes-container is-rounded">
                             Upgrades:
                             <br>
                             <table>
                                 <tr>
                                     <td>
                                         <button type="button" class="nes-btn is-disabled" onclick="upgrades('frenchPress')" id="frenchPress" style="display:none">
-                                            img
+                                            French Press (Cost: 1000)
                                             <div class="nes-container is-dark with-title hide">
                                                 <p class="title">French Press</p>
                                                 <p>Cost: 1000</p>
@@ -133,7 +133,14 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('stripeCheckout')" id="stripeCheckout" style="display:none">Stripe Checkout (Cost: 1000)</button>
+                                        <button type="button" class="nes-btn is-disabled" onclick="upgrades('stripeCheckout')" id="stripeCheckout" style="display:none">
+                                            Stripe Checkout (Cost: 1000)
+                                            <div class="nes-container is-dark with-title hide">
+                                                <p class="title">Stripe Checkout</p>
+                                                <p>Cost: 1000</p>
+                                                <p>Cashier efficiency + 100%</p>
+                                            </div>
+                                        </button>
                                     </td>
                                 </tr>
                             </table>
@@ -143,59 +150,6 @@
             </div>
 
             <div class="pure-u-1-2">
-                <!--cat menu-->
-                <div class="gridBox">
-                    <div class="contentBox">
-                        <div id="catUnlock" class="nes-container is-rounded" style="display:none">
-                            
-                            <button type="button" class="nes-btn is-disabled" onclick="adoptCat(1)" id="adoptCat">Adopt Cat (Cost: $100)</button>
-                            <div id="nameCat" style="display:none">
-                                <div class="nes-field is-inline">
-                                    <input type="text" id="catNameField" class="nes-input is-success" placeholder="Name cat">
-                                </div>
-                                <button type="button" class="nes-btn is-success" onclick="nameCat()">Confirm</button>
-                            </div>
-
-                            <div id="catStats" style="display:none">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <span id="catName"></span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span id="catLevel">Level 1</span>
-                                        </td>
-                                        <td>
-                                            - XP:
-                                        </td>
-                                        <td>
-                                            <progress class="nes-progress is-warning" value="0" max="100" id="catXp"></progress>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span id="catDps">DPS: 10</span>
-                                        </td>
-                                        <td>
-                                            - HP:
-                                        </td>
-                                        <td>
-                                            <progress class="nes-progress is-success" value="100" max="100" id="catHealth"></progress>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
                 <!--rpg-->
                 <div id="rpgUnlock" style="display:none">
                     <div class="gridBox">
@@ -229,6 +183,61 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--cat menu-->
+                <div class="gridBox">
+                    <div class="contentBox">
+                        <div id="catUnlock" class="nes-container is-rounded" style="display:none">
+                            
+                            <button type="button" class="nes-btn is-disabled" onclick="adoptCat(1)" id="adoptCat">Adopt Cat (Cost: $100)</button>
+                            <div id="nameCat" style="display:none">
+                                <div class="nes-field is-inline">
+                                    <input type="text" id="catNameField" class="nes-input is-success" placeholder="Name cat">
+                                </div>
+                                <button type="button" class="nes-btn is-success" onclick="nameCat()">Confirm</button>
+                            </div>
+
+                            <div id="catStats" style="display:none">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <span id="catName"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <img id="catIcon" src="https://i.imgur.com/TNFTBBC.png" width="120" height="90">
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table id="rpgStats" style="display:none">
+                                    <tr>
+                                        <td>
+                                            <span id="catLevel">Level 1</span>
+                                        </td>
+                                        <td>
+                                            - XP:
+                                        </td>
+                                        <td>
+                                            <progress class="nes-progress is-warning" value="0" max="100" id="catXp"></progress>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span id="catDps">DPS: 10</span>
+                                        </td>
+                                        <td>
+                                            - HP:
+                                        </td>
+                                        <td>
+                                            <progress class="nes-progress is-success" value="100" max="100" id="catHealth"></progress>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -276,16 +285,16 @@
                 </div>
 
                 <!--cat upgrades-->
-                <div class="gridBox">
+                <div class="gridBox" id="catUpgrades" style="display:none">
                     <div class="contentBox">
-                        <div id="catUpgrades" class="nes-container is-rounded">
+                        <div class="nes-container is-rounded">
                             Upgrades:
                             <br>
                             <table>
                                 <tr>
                                     <td>
                                         <button type="button" class="nes-btn is-disabled" onclick="upgrades('outsideCat')" id="outsideCat" style="display:none">
-                                            img
+                                            Outside Cat (Cost: 3000)
                                             <div class="nes-container is-dark with-title hide">
                                                 <p class="title">Outside Cat</p>
                                                 <p>Cost: 3000</p>
