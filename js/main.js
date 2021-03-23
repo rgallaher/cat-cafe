@@ -2,13 +2,14 @@
 
 var settings = {
     costIncrease: 1.15,
-    costRefund: 0.5
+    costRefund: 0.5,
+    update: 1
 }
 
 //resources
 
 var resources = {
-    money: 0,
+    money: 5000,
     coffees: 0,
     coffeePrice: 1,
     fish: 0,
@@ -31,7 +32,7 @@ var cashier = {
     perSecond: 1
 }
 
-//cats
+//cat
 
 var cat = {
     count: 0,
@@ -42,7 +43,7 @@ var cat = {
     hungerText: "",
     name: "The cat",
 
-    //stats
+    //rpg stats
     level: 1,
     dpsMult: 10,
     dps: 10,
@@ -66,6 +67,77 @@ var unlocked = {
     tierOne: 0,
     rpgBuy: 0,
     rpg: 0
+}
+
+//save game to localstorage
+function save() {
+    //savedata
+    var saveData = {
+        //settings
+        settings: settings,
+
+        //resources
+        resources: resources,
+
+        //buildings
+        barista: barista,
+        cashier: cashier,
+
+        //cat
+        cat: cat,
+
+        //rpg
+        monster: monster,
+
+        //unlocks
+        unlocked: unlocked
+    }
+    localStorage.setItem("catCafeSave", JSON.stringify(saveData))
+}
+
+//load existing save
+function loadSave() {
+    var savegame = JSON.parse(localStorage.getItem("catCafeSave"))
+    if (savegame !== null) {
+        //settings
+        if (typeof savegame.settings !== undefined) {
+            settings = savegame.settings
+        }
+        
+
+        //resources
+        if (typeof savegame.resources !== undefined) {
+        resources = savegame.resources
+        }
+
+        //buildings
+        if (typeof savegame.barista !== undefined) {
+        barista = savegame.barista
+        }
+        if (typeof savegame.cashier !== undefined) {
+        cashier = savegame.cashier
+        }
+    
+        //cat
+        if (typeof savegame.cat !== undefined) {
+        cat = savegame.cat
+        }
+
+        //rpg
+        if (typeof savegame.monster !== undefined) {
+        monster = savegame.monster
+        }
+
+        //unlocks
+        if (typeof savegame.unlocked !== undefined) {
+            unlocked = savegame.unlocked
+        }
+    }
+}
+
+//delete save
+function deleteSave() {
+    localStorage.removeItem("catCafeSave")
 }
 
 //resource get functions
@@ -253,13 +325,20 @@ function unlocks() {
 
 //updates the game ui
 function gameTick() {
+    
+    //update coffee price and tip bonus
+    
     document.getElementById("coffeePrice").innerHTML = "$" + resources.coffeePrice
     if(cat.count > 0) {
         document.getElementById("averageTip").innerHTML = "$" + (cat.tipBonus * cat.level)
     }
     
+    //update coffee and money amount
+
     document.getElementById("money").innerHTML = "$" + Math.floor(resources.money)
     document.getElementById("coffees").innerHTML = Math.floor(resources.coffees)
+
+    //disable purchase buttons when too expensive
 
     document.getElementById("baristas").innerHTML = barista.count
     document.getElementById("buyBarista").innerHTML = "Hire Barista (Cost: $" + Math.ceil(barista.cost) + ")"
@@ -312,6 +391,8 @@ function gameTick() {
         }   
     }
 
+    //hunger ui update
+
     if(unlocked.hunger == 1) {
         document.getElementById("catHunger").innerHTML = cat.hungerText
         document.getElementById("feedCat").innerHTML = "Feed Cats (Cost: " + cat.count + " Fish)"
@@ -344,7 +425,7 @@ function gameTick() {
         }
     }
 
-    //rpg
+    //rpg ui update
 
     if(unlocked.rpg == 1) {
         document.getElementById("catLevel").innerHTML = "Level " + cat.level
@@ -356,7 +437,7 @@ function gameTick() {
         document.getElementById("monsterHealth").setAttribute('value', monster.health / monster.level)
     }
 
-    //upgrades
+    //upgrades ui update
 
     if(resources.money >= 1000) {
         document.getElementById("frenchPress").setAttribute('class','nes-btn')
@@ -390,7 +471,13 @@ window.setInterval(function() {
     gameTick()
 }, 20)
 
+//combat loop
 window.setInterval(function() {
     combat(1)
     gameTick()
 }, 1000)
+
+//save loop
+window.setInterval(function() {
+    save()
+}, 10000)

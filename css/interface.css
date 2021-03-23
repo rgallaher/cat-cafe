@@ -50,3 +50,9 @@ border-radius: 12px;
     display: inline-block;
     z-index: 99 !important;
 }
+
+.bottom {
+    position:absolute;                 
+    bottom:0;                         
+    right:0;                         
+}
