@@ -39,7 +39,7 @@ border-radius: 12px;
 }
 
 .rpgContentBox {
-    background-image: url("https://img.17qq.com/images/gmmcmpnmhlv.jpeg");
+    background-image: url('https://img.17qq.com/images/gmmcmpnmhlv.jpeg');
     background-size: 50% 100%;
     background-color: darkseagreen;
     padding: -100px;

@@ -314,11 +314,11 @@ function feedCat() {
         resources.fish -= cat.count
         cat.hunger += resources.fishHunger
         
-        if(cat.health + resources.fishHealth <= cat.level * 100) {
+        if(cat.health + resources.fishHealth <= cat.baseHealth) {
             cat.health += resources.fishHealth
         }
-        else if(cat.health < cat.level * 100) {
-            cat.health = cat.level * 100
+        else if(cat.health < cat.baseHealth) {
+            cat.health = cat.baseHealth
         }
     }
     catHunger()
@@ -435,7 +435,7 @@ function combat(number) {
         if(monster.name !== "Resting") {
             monster.health -= (cat.dps / number)
         }
-        if(cat.health - monster.dps / number <= 100) {
+        if(cat.health - monster.dps / number <= cat.baseHealth) {
             cat.health -= (monster.dps / number)
         }
         if(monster.health <= 0) {
@@ -444,8 +444,8 @@ function combat(number) {
             if (cat.xp >= cat.level * 10) {
                 cat.xp = 0
                 cat.level += 1
+                cat.dps = cat.dpsMult * cat.level
             }
-            cat.dps = cat.dpsMult * cat.level
             var drop = monster.drops[Math.floor(Math.random() * monster.drops.length)]
             inventory[drop] += 1
         }
@@ -638,6 +638,9 @@ function gameTick() {
 
     //inventory ui update
     document.getElementById("eggs").innerHTML = inventory.eggs
+    document.getElementById("onions").innerHTML = inventory.onions
+    document.getElementById("potatoes").innerHTML = inventory.potatoes
+    document.getElementById("meat").innerHTML = inventory.meat
 
     //upgrades ui update
 
