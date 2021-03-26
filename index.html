@@ -256,7 +256,7 @@
                                                 <td>
                                                     <span style="color:white">HP:</span>
                                                 </td>
-                                                <td>
+                                                <td class="progress-parent">
                                                     <progress class="nes-progress is-error" value="100" max="100" id="monsterHealth"></progress>
                                                     <div id="monsterHealthText" class="progress-text">100/100</div>
                                                 </td>
@@ -305,27 +305,33 @@
                                 </table>
                                 <table id="rpgStats" style="display:none">
                                     <tr>
+                                        <td></td>
                                         <td>
                                             <span id="catLevel">Level 1</span>
                                         </td>
+                                    </tr>
+                                    <tr>
                                         <td>
-                                            - XP:
+                                            XP:
                                         </td>
-                                        <td>
+                                        <td class="progress-parent">
                                             <progress class="nes-progress is-warning" value="0" max="100" id="catXp"></progress>
                                             <div id="catXpText" class="progress-text">0/10</div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span id="catDps">DPS: 10</span>
+                                            HP:
                                         </td>
-                                        <td>
-                                            - HP:
-                                        </td>
-                                        <td>
+                                        <td class="progress-parent">
                                             <progress class="nes-progress is-success" value="100" max="100" id="catHealth"></progress>
                                             <div id="catHealthText" class="progress-text">100/100</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>
+                                            <span id="catDps">DPS: 10</span>
                                         </td>
                                     </tr>
                                 </table>
