@@ -1,5 +1,7 @@
-* {
-box-sizing: border-box;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
@@ -14,6 +16,7 @@ img {
 
 table td {
     border: 10px solid transparent;
+    position: relative;
 }
 
 .imageBack {
@@ -35,8 +38,16 @@ padding: -100px;
 border-radius: 12px;
 }
 
-.innerContentBox {
-    background: darkseagreen;
+.rpgContentBox {
+    background-image: url("https://img.17qq.com/images/gmmcmpnmhlv.jpeg");
+    background-size: 50% 100%;
+    background-color: darkseagreen;
+    padding: -100px;
+    border-radius: 0px;
+}
+
+.inventoryContentBox {
+    background-color: burlywood;
     padding: -100px;
     border-radius: 0px;
 }
@@ -56,3 +67,25 @@ border-radius: 12px;
     bottom:0;                         
     right:0;                         
 }
+
+.progress-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 99 !important;
+}
+
+select {
+    background-color: white; /* set select background color */
+    /* A reset of styles, including removing the default dropdown arrow
+    appearance: none;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit; */
+  }

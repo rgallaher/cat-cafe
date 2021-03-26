@@ -33,45 +33,117 @@
                 <!--coffee menu-->
                 <div class="gridBox">
                     <div class="contentBox">
-                        <div id="resources" class="nes-container is-rounded">
+                        <div id="moneyBox" class="nes-container is-rounded">
+                            <img src="https://i.imgur.com/H7nXg0T.png" width="58" height="30">
+                            Money: <span id="money">$0</span>
+                            <!--table now hidden-->
+                            <div style="display:none">
+                                <table>
+                                    <tr>
+                                        Coffee Price: <span id="coffeePrice">$1</span>
+                                    </tr>
+                                    <tr>
+                                        <!--average tip here previously-->
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td>
+                                            <img src="https://i.imgur.com/TW6XbcN.png" width="64" height="64">
+                                        </td>
+                                        <td>
+                                            Coffees: <span id="coffees">0</span>
+                                        </td>    
+                                        <td>
+                                            <button type="button" class="nes-btn" onclick="coffeeClick(1)">Make Coffee</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <!--money icon here previously-->
+                                        </td>
+                                        <td>
+                                            <!--money here previously-->
+                                        </td>
+                                        <td>
+                                            <!--sell button here previously-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="inventory" class="gridBox">
+                    <div class="contentBox">
+                        <div class="nes-container is-rounded">
+                            <label for="foodSelect">Select Food</label>
+                            <div class="nes-select">
+                            <select required id="foodSelect" onchange="foodSelect(this.value)">
+                                <option value="" disabled selected hidden>Select...</option>
+                                <option value="0">Coffee</option>
+<!--ADD ADDITIONAL FOODS HERE-->
+                                <option value="1">Omelette</option>
+                                <option value="2">Scramble</option>
+                                <option value="3">French Fries</option>
+                                <option value="4">Steak</option>
+                            </select>
+                            </div>
                             <table>
                                 <tr>
-                                    Coffee Price: <span id="coffeePrice">$1</span>
-                                </tr>
-                                <tr>
-                                    Average Tip: <span id="averageTip">$0</span>
-                                </tr>
-                                <tr></tr>
-                                <tr>
                                     <td>
-                                        <img src="https://i.imgur.com/TW6XbcN.png" width="64" height="64">
+                                        <img src="https://i.imgur.com/TW6XbcN.png" width="128" height="128">
                                     </td>
                                     <td>
-                                        Coffees: <span id="coffees">0</span>
-                                    </td>    
-                                    <td>
-                                        <button type="button" class="nes-btn" onclick="coffeeClick(1)">Make Coffee</button>
+                                        <button type="button" class="nes-btn" onclick="sellClick(1)">Sell</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <img src="https://i.imgur.com/H7nXg0T.png" width="58" height="30">
+                                        Price: <span id="foodPrice">$1</span>
                                     </td>
                                     <td>
-                                        Money: <span id="money">$0</span>
+                                        Average Tip: <span id="averageTip">$0</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Requires: 
                                     </td>
                                     <td>
-                                        <button type="button" class="nes-btn" onclick="sellClick(1)">Sell Coffee</button>
+                                        <span id="ingredients">None</span>
                                     </td>
                                 </tr>
                             </table>
+                            <br>
+                            Inventory
+                            <div class="inventoryContentBox">
+                                <div class="nes-container with-title is-centered">
+                                    <table>
+<!--ADD INVENTORY ITEMS HERE-->
+                                        <tr>
+                                            <td>Eggs</td><td>x</td><td id="eggs">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Onions</td><td>x</td><td id="onions">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Potatoes</td><td>x</td><td id="potatoes">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Meat</td><td>x</td><td id="meat">0</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <br>
+                </div>
 
+                <!--currently invisible-->
+                <div id="buildings" class="gridBox" style="display:none">
                     <div class="contentBox">
-                        <div id="buildings" class="nes-container is-rounded">
+                        <div class="nes-container is-rounded">
                             <table>
                                 <tr>
                                     <td>
@@ -156,29 +228,45 @@
                     <div class="gridBox">
                         <div class="contentBox">
                             <div class="nes-container is-rounded">
-                                <div class="innerContentBox">
+                                <label for="monsterSelect">Hunt Monsters</label>
+                                <div class="nes-select">
+                                <select required id="monsterSelect" onchange="monsterSelect(this.value)">
+                                    <option value="" disabled selected hidden>Select...</option>
+                                    <option value="0">Rest</option>
+<!--ADD ADDITIONAL MONSTERS HERE-->
+                                    <option value="1">Eggdog (Level 1)</option>
+                                    <option value="2">Onyon (Level 5)</option>
+                                    <option value="3">Tato (Level 15)</option>
+                                    <option value="4">Pig God (Level 75)</option>
+                                </select>
+                                </div>
+                                <div class="rpgContentBox">
                                     <div class="nes-container with-title is-centered">
-                                        <p class="title" id="stage">Stage 1</p>
+                                        <p class="title" id="unused-stage"></p>
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <span id="monsterName">Indoor Fish -</span>
+                                                    <span id="monsterName" style="color:white">Resting</span>
                                                 </td>
                                                 <td>
-                                                    <span id="monsterLevel">Level 1</span>
+                                                    <span id="monsterLevel" style="display:none; color:white">Level 0</span>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr id="monsterHealthBar" style="display:none">
                                                 <td>
-                                                    HP: 
+                                                    <span style="color:white">HP:</span>
                                                 </td>
                                                 <td>
                                                     <progress class="nes-progress is-error" value="100" max="100" id="monsterHealth"></progress>
+                                                    <div id="monsterHealthText" class="progress-text">100/100</div>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <img src="https://i.imgur.com/N2txc3V.png" width="128" height="128">
+                                                    <img id="monsterImage" src="https://64.media.tumblr.com/tumblr_mairyt4v5J1rfjowdo1_500.gif" width="128" height="128">
+                                                </td>
+                                                <td id="monsterDropsContainer" style="display:none">
+                                                    <span style="color:white">Drops:</span><div id="monsterDrops" style="color:white"></div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -225,6 +313,7 @@
                                         </td>
                                         <td>
                                             <progress class="nes-progress is-warning" value="0" max="100" id="catXp"></progress>
+                                            <div id="catXpText" class="progress-text">0/10</div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -236,6 +325,7 @@
                                         </td>
                                         <td>
                                             <progress class="nes-progress is-success" value="100" max="100" id="catHealth"></progress>
+                                            <div id="catHealthText" class="progress-text">100/100</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -255,7 +345,7 @@
                                             <span id="catHunger">The cat is hungry.</span>
                                         </td>
                                         <td>
-                                            <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed Cats (Cost: 0 Fish)</button>
+                                            <button type="button" class="nes-btn is-disabled" onclick="feedCat()" id="feedCat">Feed (Cost: 0 Fish)</button>
                                         </td>
                                     </tr>
                                 </table>
