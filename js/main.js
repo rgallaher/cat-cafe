@@ -65,6 +65,7 @@ var cat = {
     dpsMult: 5,
     dps: 5,
     health: 100,
+    baseHealth: 100,
     xp: 0
 }
 
@@ -183,13 +184,13 @@ function sellClick(number) {
         else {
             var ingredientCheck = 1
             for(var i = 0; i < food.ingredients.length; i++) {
-                if(inventory[food.ingredients[i]] < 1) {
+                if(inventory[food.ingredients[i]] < number) {
                     ingredientCheck = 0
                 }
             }
             if(ingredientCheck == 1) {
                 for(var i = 0; i < food.ingredients.length; i++) {
-                    inventory[food.ingredients[i]] -= 1
+                    inventory[food.ingredients[i]] -= number
                 }
                 resources.money += (number * (food.price + cat.tipBonus * cat.level))
             }
@@ -445,6 +446,7 @@ function combat(number) {
                 cat.xp = 0
                 cat.level += 1
                 cat.dps = cat.dpsMult * cat.level
+                cat.baseHealth = 100 * cat.level
             }
             var drop = monster.drops[Math.floor(Math.random() * monster.drops.length)]
             inventory[drop] += 1
@@ -479,6 +481,7 @@ function upgrades(string) {
         document.getElementById("outsideCat").style.display = "none"
         document.getElementById("rpgUnlock").style.display = "block"
         document.getElementById("rpgStats").style.display = "block"
+        document.getElementById("inventory").style.display = "block"
     }
 }
 
@@ -627,8 +630,8 @@ function gameTick() {
         document.getElementById("catXp").setAttribute('value', cat.xp * 10 / cat.level)
         document.getElementById("catXpText").innerHTML = cat.xp + "/" + cat.level * 10
 
-        document.getElementById("catHealth").setAttribute('value', cat.health / cat.level)
-        document.getElementById("catHealthText").innerHTML = cat.health + "/" + cat.level * 100
+        document.getElementById("catHealth").setAttribute('value', cat.health / cat.baseHealth * 100)
+        document.getElementById("catHealthText").innerHTML = cat.health + "/" + cat.baseHealth
 
         document.getElementById("catDps").innerHTML = "DPS: " + cat.dps
 
@@ -637,10 +640,10 @@ function gameTick() {
     }
 
     //inventory ui update
-    document.getElementById("eggs").innerHTML = inventory.eggs
-    document.getElementById("onions").innerHTML = inventory.onions
-    document.getElementById("potatoes").innerHTML = inventory.potatoes
-    document.getElementById("meat").innerHTML = inventory.meat
+    document.getElementById("eggs").innerHTML = Math.floor(inventory.eggs)
+    document.getElementById("onions").innerHTML = Math.floor(inventory.onions)
+    document.getElementById("potatoes").innerHTML = Math.floor(inventory.potatoes)
+    document.getElementById("meat").innerHTML = Math.floor(inventory.meat)
 
     //upgrades ui update
 
@@ -669,7 +672,7 @@ function gameTick() {
 
 //game refresh rate
 window.setInterval(function() {
-    coffeeClick(barista.count * barista.perSecond / 50)
+    //coffeeClick(barista.count * barista.perSecond / 50)
     sellClick(cashier.count * cashier.perSecond / 50)
     catHunger()
     unlocks()
