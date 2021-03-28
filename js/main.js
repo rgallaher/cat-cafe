@@ -514,6 +514,30 @@ function unlocks() {
     }
 }
 
+var counter = 0
+function achievement() {
+    document.getElementById("achv").innerHTML = '<div id="temp" class="ani_div nes-container is-rounded">' +
+        '<div class="ani_icon">' +
+        '</div>' +
+        '<span>Achievement Unlocked!<br><br>' +
+            '<p>'+"Baby Steps"+'</p>' +
+        '</span>' +
+        '</div>'
+    setTimeout(function() {
+        remove()
+    }, 2950);
+    counter++
+}
+
+function cap(str){
+return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function remove(){
+    document.getElementById("temp").remove()
+}
+
+
 //updates the game ui
 function gameTick() {
     
